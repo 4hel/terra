@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "4hel-terraform-chapter-4"
-    key    = "stage/services/webserver-cluster/terraform.tfstate"
+    key    = "prod/services/webserver-cluster/terraform.tfstate"
     region = "eu-central-1"
   }
 }
@@ -13,7 +13,7 @@ provider "aws" {
 module "webserver-cluster" {
   source = "../../../modules/services/webserver-cluster"
 
-  env                    = "stage"
+  env                    = "prod"
   db_remote_state_bucket = "4hel-terraform-chapter-4"
-  db_remote_state_key    = "stage/data-stores/mysql/terraform.tfstate"
+  db_remote_state_key    = "prod/data-stores/mysql/terraform.tfstate"
 }

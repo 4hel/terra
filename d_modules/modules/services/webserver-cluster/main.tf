@@ -30,7 +30,7 @@ resource "aws_launch_configuration" "example" {
 }
 
 resource "aws_security_group" "instance-sg" {
-  name = "${var.cluster_name}-instance-sg"
+  name = "${var.env}-instance-sg"
 
   ingress {
     from_port = "${var.http_port}"
@@ -45,7 +45,7 @@ resource "aws_security_group" "instance-sg" {
 }
 
 resource "aws_security_group" "elb-sg" {
-  name = "${var.cluster_name}-elb-sg"
+  name = "${var.env}-webservers-elb-sg"
 
   ingress {
     from_port = 80
@@ -78,13 +78,13 @@ resource "aws_autoscaling_group" "example" {
 
   tag {
     key = "Name"
-    value = "${var.cluster_name}-asg"
+    value = "${var.env}-asg"
     propagate_at_launch = true
   }
 }
 
 resource "aws_elb" "example" {
-  name = "${var.cluster_name}-elb"
+  name = "${var.env}-webservers-elb"
   availability_zones   = ["${data.aws_availability_zones.all.names}"]
   security_groups = ["${aws_security_group.elb-sg.id}"]
 

@@ -3,8 +3,8 @@ variable "http_port" {
   default = 8080
 }
 
-variable "cluster_name" {
-  description = "the name to use for all the cluster resouces"
+variable "env" {
+  description = "the environment stage or prod"
 }
 
 variable "db_remote_state_bucket" {

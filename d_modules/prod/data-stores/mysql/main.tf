@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "4hel-terraform-chapter-4"
-    key    = "stage/data-stores/mysql/terraform.tfstate"
+    key    = "prod/data-stores/mysql/terraform.tfstate"
     region = "eu-central-1"
   }
 }
@@ -13,6 +13,6 @@ provider "aws" {
 module "mysql" {
   source = "../../../modules/data-stores/mysql"
 
-  env         = "stage"
+  env         = "prod"
   db_password = "${var.db_password}"
 }
